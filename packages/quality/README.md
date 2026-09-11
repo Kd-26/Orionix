@@ -1,0 +1,3 @@
+# Quality
+
+**Purpose:** customer-side quality-validation boundaries. **Responsibilities:** define evaluation input/output interfaces for exact match, normalized match, structured-output validity, and optional semantic comparison. **Non-responsibilities:** model inference, dataset distribution, evaluator algorithms, remote upload, or optimization ranking. **Allowed dependencies:** `schemas` only. **Prohibited dependencies:** engine/provider SDKs, CUDA, web frameworks, and ORMs. **Status:** contracts and evaluator protocol only. **Next milestone:** implement deterministic local exact/normalized matching against a small versioned customer dataset.
