@@ -4,20 +4,11 @@ version = "0.1.0.dev0"
 description = "Isolated engine and provider integration boundaries for Orionix"
 requires-python = ">=3.12"
 dependencies = [
-  "llmopt-domain",
   "llmopt-schemas",
 ]
 
 [project.optional-dependencies]
-vllm = []
-sglang = []
-tensorrt-llm = []
-lmcache = []
-foundry = []
-gpu = []
-
 [tool.uv.sources]
-llmopt-domain = { workspace = true }
 llmopt-schemas = { workspace = true }
 
 [build-system]
