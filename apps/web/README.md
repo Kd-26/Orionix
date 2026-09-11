@@ -1,0 +1,3 @@
+# Web application boundary
+
+**Purpose:** reserve the future reporting and job-management user interface. **Responsibilities:** eventually present versioned `/v1` control-plane resources and explicit user approvals. **Non-responsibilities:** optimization, direct agent/GPU access, credentials, provider provisioning, or deployment mutation. **Allowed dependencies:** a future generated/versioned API client and presentation-only libraries. **Prohibited dependencies:** Python domain internals, engine/provider SDKs, CUDA, and database access. **Status:** documentation only; no web framework or dashboard exists. **Next milestone:** none until control-plane persistence/auth and agent protocol boundaries are implemented.
