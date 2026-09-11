@@ -10,13 +10,17 @@ PACKAGES = (
     "llmopt_capsule",
     "llmopt_cli",
     "llmopt_common",
+    "llmopt_config",
     "llmopt_control_plane",
+    "llmopt_deployment",
+    "llmopt_discovery",
     "llmopt_domain",
     "llmopt_integrations",
-    "llmopt_optimization_worker",
     "llmopt_optimizer",
+    "llmopt_quality",
     "llmopt_schemas",
     "llmopt_telemetry",
+    "llmopt_workload",
 )
 
 
