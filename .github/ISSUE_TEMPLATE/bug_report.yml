@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible repository or tooling defect
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include secrets, customer data, prompts, model weights, or security vulnerabilities.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide minimal safe steps and environment details.
+    validations:
+      required: true
