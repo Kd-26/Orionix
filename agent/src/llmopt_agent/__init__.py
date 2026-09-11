@@ -4,9 +4,13 @@ from llmopt_agent.config import AgentConfig
 from llmopt_agent.health import AgentHealth
 from llmopt_agent.interfaces import (
     CapsuleBuilder,
+    CommandHandler,
     DeploymentValidator,
-    EngineController,
+    DiagnosticCollector,
     EnvironmentInspector,
+    HeartbeatPublisher,
+    JobLeaseClient,
+    JobWorkspaceManager,
     MetricsCollector,
 )
 
@@ -14,9 +18,13 @@ __all__ = [
     "AgentConfig",
     "AgentHealth",
     "CapsuleBuilder",
+    "CommandHandler",
     "DeploymentValidator",
-    "EngineController",
+    "DiagnosticCollector",
     "EnvironmentInspector",
+    "HeartbeatPublisher",
+    "JobLeaseClient",
+    "JobWorkspaceManager",
     "MetricsCollector",
 ]
 
