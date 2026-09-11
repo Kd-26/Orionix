@@ -28,4 +28,29 @@ def test_placeholder_does_not_execute() -> None:
     result = runner.invoke(app, ["optimize"])
 
     assert result.exit_code == 0
-    assert "not implemented yet" in result.output
+    assert "not implemented in this milestone" in result.output
+
+
+@pytest.mark.smoke
+@pytest.mark.parametrize(
+    "command",
+    (
+        "inspect",
+        "analyze",
+        "benchmark",
+        "optimize",
+        "quality",
+        "status",
+        "report",
+        "capsule",
+        "export",
+        "agent",
+        "diagnostics",
+        "cleanup",
+    ),
+)
+def test_every_subcommand_help_is_safe(command: str) -> None:
+    result = runner.invoke(app, [command, "--help"])
+
+    assert result.exit_code == 0
+    assert "placeholder" in result.output.lower()
