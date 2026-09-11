@@ -4,11 +4,13 @@ version = "0.1.0.dev0"
 description = "Versioned Pydantic contracts for Orionix"
 requires-python = ">=3.12"
 dependencies = [
+  "llmopt-common",
   "llmopt-domain",
   "pydantic==2.11.7",
 ]
 
 [tool.uv.sources]
+llmopt-common = { workspace = true }
 llmopt-domain = { workspace = true }
 
 [build-system]
