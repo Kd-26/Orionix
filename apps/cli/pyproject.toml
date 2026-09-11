@@ -1,0 +1,19 @@
+[project]
+name = "llmopt-cli"
+version = "0.1.0.dev0"
+description = "Command-line shell for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-common",
+  "typer==0.16.0",
+]
+
+[project.scripts]
+llmopt = "llmopt_cli.main:main"
+
+[tool.uv.sources]
+llmopt-common = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
