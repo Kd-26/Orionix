@@ -3,5 +3,5 @@ environment = "development"
 [telemetry]
 enabled = false
 
-[benchmarking]
+[benchmark]
 output_dir = "benchmark-output"
