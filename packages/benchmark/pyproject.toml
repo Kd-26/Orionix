@@ -4,13 +4,13 @@ version = "0.1.0.dev0"
 description = "Benchmark planning contracts for Orionix"
 requires-python = ">=3.12"
 dependencies = [
-  "llmopt-domain",
+  "llmopt-common",
   "llmopt-schemas",
   "pydantic==2.11.7",
 ]
 
 [tool.uv.sources]
-llmopt-domain = { workspace = true }
+llmopt-common = { workspace = true }
 llmopt-schemas = { workspace = true }
 
 [build-system]
