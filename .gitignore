@@ -37,21 +37,29 @@ secrets*.yaml
 *.onnx
 *.cubin
 *.fatbin
+*.core
 *.engine
 *.plan
 model-weights/
 customer-data/
+generated-secrets/
+deployment-secrets/
 benchmark-output/
 benchmark-results/
 execution-capsules/
 capsules/
 profiling-traces/
+diagnostic-bundles/
 nsight*/
+cuda-dumps/
 *.nsys-rep
 *.qdrep
 *.sqlite
 *.db
 *.log
 
-# Generic *.bin is intentionally blocked because it commonly contains weights.
-*.bin
+# Keep small reviewed binary fixtures possible; block model/capsule binary payloads by path.
+model-weights/**/*.bin
+customer-data/**/*.bin
+execution-capsules/**/*.bin
+capsules/**/*.bin
