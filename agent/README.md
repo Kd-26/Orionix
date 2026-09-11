@@ -1,0 +1,3 @@
+# Customer Agent
+
+**Purpose:** future trusted execution boundary inside customer infrastructure. **Responsibilities:** interfaces for hardware/model inspection, benchmark execution, engine lifecycle, metrics collection, capsule generation, deployment validation, plus local configuration and health/version metadata. **Non-responsibilities:** GPU access today, remote control, optimization policy, cloud persistence, or production deployment. **Allowed dependencies:** shared contracts, common foundations, benchmark/capsule ports, and optional integration adapters. **Future:** every remote command and data egress path requires explicit authorization and audit design.
