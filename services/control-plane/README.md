@@ -1,0 +1,3 @@
+# Control Plane
+
+**Purpose:** future cloud coordination boundary. **Responsibilities:** eventually coordinate organizations, projects, jobs, experiment/capsule metadata, history, policies, billing, and agents through versioned contracts. **Non-responsibilities:** GPU execution, engine control, production APIs today, authentication, billing, or database selection. **Allowed dependencies:** domain, schemas, common, and application services; never customer GPU libraries. **Future:** APIs will use idempotent job creation, explicit state transitions, stable identifiers, and backwards-compatible contracts.
