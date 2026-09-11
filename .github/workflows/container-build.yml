@@ -1,0 +1,13 @@
+name: Container Build (Manual Placeholder)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unavailable:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Container builds are intentionally unavailable until image policies are approved."
