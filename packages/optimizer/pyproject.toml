@@ -4,12 +4,10 @@ version = "0.1.0.dev0"
 description = "Optimization planning interfaces for Orionix"
 requires-python = ">=3.12"
 dependencies = [
-  "llmopt-domain",
   "llmopt-schemas",
 ]
 
 [tool.uv.sources]
-llmopt-domain = { workspace = true }
 llmopt-schemas = { workspace = true }
 
 [build-system]
