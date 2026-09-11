@@ -7,6 +7,7 @@ dependencies = [
   "llmopt-benchmark",
   "llmopt-capsule",
   "llmopt-common",
+  "llmopt-config",
   "llmopt-integrations",
   "llmopt-schemas",
   "llmopt-telemetry",
@@ -17,6 +18,7 @@ dependencies = [
 llmopt-benchmark = { workspace = true }
 llmopt-capsule = { workspace = true }
 llmopt-common = { workspace = true }
+llmopt-config = { workspace = true }
 llmopt-integrations = { workspace = true }
 llmopt-schemas = { workspace = true }
 llmopt-telemetry = { workspace = true }
