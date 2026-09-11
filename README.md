@@ -10,9 +10,9 @@ Customer Agent
 Inference Engines / Customer GPUs
 ```
 
-The planned lifecycle is **Inspect → Analyze → Benchmark → Optimize → Validate → Package → Deploy → Monitor → Re-optimize**. Customer model weights, prompts, and benchmark payloads remain customer-side by default.
+The planned lifecycle is **Inspect → Analyze → Benchmark → Optimize → Validate → Package → Export → Monitor → Revalidate**. Customer model weights, prompts, evaluation datasets, and benchmark payloads remain customer-side by default. First-release deployment changes require manual approval.
 
-> **Current status:** Phase 0 repository bootstrap only. Core execution and optimization functionality has not been implemented.
+> **Current status:** architecture-alignment and repository-foundation milestone only. The repository is architecturally prepared for staged implementation; core runtime functionality has not been implemented.
 
 ## Development
 
@@ -28,16 +28,21 @@ See [local development](docs/development/local-development.md), [architecture](d
 
 ## Repository map
 
-- `packages/domain` — dependency-free identifiers and lifecycle enums.
-- `packages/schemas` — versioned Pydantic wire/domain contracts.
-- `packages/common` — shared errors, configuration, and logging setup.
+- `packages/common` — typed identifiers, shared errors, and safe logging.
+- `packages/domain` — business lifecycle concepts and states.
+- `packages/schemas` — versioned Pydantic transport/artifact contracts.
+- `packages/config` — typed configuration and precedence.
+- `packages/discovery` and `packages/workload` — inspection/profile ports.
 - `packages/optimizer` — optimization ports only.
 - `packages/benchmark` — benchmark planning and execution contracts only.
+- `packages/quality` — customer-side quality-evaluation ports.
 - `packages/capsule` — Execution Capsule metadata contracts only.
 - `packages/integrations` — isolated future engine/provider adapters.
 - `packages/telemetry` — no-op-by-default telemetry contracts.
+- `packages/deployment` — deployment-export ports only.
 - `agent` — customer-side agent boundary.
 - `apps/cli` — command-line entry point.
-- `services` — control-plane and worker boundaries.
+- `services/control-plane` — one modular future cloud deployable.
+- `apps/web` — documentation-only future presentation boundary.
 
 This repository is proprietary and confidential. See [LICENSE.md](LICENSE.md).
