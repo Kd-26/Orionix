@@ -1,1 +1,0 @@
-"""Future Foundry adapter namespace."""
