@@ -1,0 +1,13 @@
+name: GPU Tests (Placeholder)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  not-configured:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "GPU runners and integration tests are intentionally not configured in Phase 0."
