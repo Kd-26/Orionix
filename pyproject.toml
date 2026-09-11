@@ -29,9 +29,12 @@ testpaths = ["tests"]
 markers = [
   "unit: isolated CPU-only unit tests",
   "integration: subsystem integration tests",
+  "e2e: end-to-end tests across deployable boundaries",
   "contract: serialized-contract compatibility tests",
   "smoke: basic installation and startup tests",
   "gpu: requires CUDA-capable hardware",
+  "performance: performance or benchmark-regression tests",
+  "security: security invariant tests",
   "slow: long-running tests",
 ]
 
@@ -59,9 +62,14 @@ source = [
   "llmopt_capsule",
   "llmopt_cli",
   "llmopt_common",
+  "llmopt_config",
   "llmopt_domain",
+  "llmopt_deployment",
+  "llmopt_discovery",
   "llmopt_integrations",
   "llmopt_optimizer",
+  "llmopt_quality",
   "llmopt_schemas",
   "llmopt_telemetry",
+  "llmopt_workload",
 ]
