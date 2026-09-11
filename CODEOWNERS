@@ -1,6 +1,9 @@
 # Replace these documented placeholders with real GitHub teams when provisioned.
 * @Kd-26
 /packages/optimizer/ @Kd-26
+/packages/config/ @Kd-26
+/packages/quality/ @Kd-26
+/packages/deployment/ @Kd-26
 /agent/ @Kd-26
 /packages/integrations/ @Kd-26
 /docs/security/ @Kd-26
