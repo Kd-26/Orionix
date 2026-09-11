@@ -2,6 +2,7 @@
 
 from llmopt_optimizer.interfaces import (
     CandidateGenerator,
+    CapabilityEvaluator,
     ConstraintEvaluator,
     OptimizationContext,
     OptimizationStrategy,
@@ -10,6 +11,7 @@ from llmopt_optimizer.interfaces import (
 
 __all__ = [
     "CandidateGenerator",
+    "CapabilityEvaluator",
     "ConstraintEvaluator",
     "OptimizationContext",
     "OptimizationStrategy",
