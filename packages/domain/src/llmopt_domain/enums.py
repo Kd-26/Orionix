@@ -7,14 +7,17 @@ class OptimizationJobState(StrEnum):
     """Future control-plane optimization job states."""
 
     PENDING = "PENDING"
+    CLAIMED = "CLAIMED"
     INSPECTING = "INSPECTING"
     ANALYZING = "ANALYZING"
     BENCHMARKING = "BENCHMARKING"
     OPTIMIZING = "OPTIMIZING"
     VALIDATING = "VALIDATING"
     PACKAGING = "PACKAGING"
+    CANCELLING = "CANCELLING"
     COMPLETED = "COMPLETED"
     FAILED = "FAILED"
+    TIMED_OUT = "TIMED_OUT"
     CANCELLED = "CANCELLED"
 
 
@@ -27,3 +30,16 @@ class CapsuleState(StrEnum):
     STALE = "STALE"
     INCOMPATIBLE = "INCOMPATIBLE"
     RETIRED = "RETIRED"
+
+
+class ComputeState(StrEnum):
+    """Provider-neutral compute-target states."""
+
+    REQUESTED = "REQUESTED"
+    PROVISIONING = "PROVISIONING"
+    READY = "READY"
+    BUSY = "BUSY"
+    STOPPING = "STOPPING"
+    STOPPED = "STOPPED"
+    FAILED = "FAILED"
+    TERMINATED = "TERMINATED"
