@@ -1,0 +1,57 @@
+# Python and environments
+__pycache__/
+*.py[cod]
+.venv/
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+dist/
+build/
+*.egg-info/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.yaml
+
+# Models, customer data, and large artifacts
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.onnx
+*.cubin
+*.fatbin
+*.engine
+*.plan
+model-weights/
+customer-data/
+benchmark-output/
+benchmark-results/
+execution-capsules/
+capsules/
+profiling-traces/
+nsight*/
+*.nsys-rep
+*.qdrep
+*.sqlite
+*.db
+*.log
+
+# Generic *.bin is intentionally blocked because it commonly contains weights.
+*.bin
