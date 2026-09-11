@@ -21,6 +21,10 @@ class OptimizationContext:
     slo: SLOSpec
 
 
+class CapabilityEvaluator(Protocol):
+    def accepts(self, context: OptimizationContext, config: ServingConfig) -> bool: ...
+
+
 class CandidateGenerator(Protocol):
     def generate(self, context: OptimizationContext) -> tuple[ServingConfig, ...]: ...
 
