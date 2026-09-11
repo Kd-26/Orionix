@@ -1,4 +1,0 @@
-environment = "testing"
-
-[telemetry]
-enabled = false
