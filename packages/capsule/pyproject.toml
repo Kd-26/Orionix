@@ -1,0 +1,18 @@
+[project]
+name = "llmopt-capsule"
+version = "0.1.0.dev0"
+description = "Execution Capsule metadata contracts for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-domain",
+  "llmopt-schemas",
+  "pydantic==2.11.7",
+]
+
+[tool.uv.sources]
+llmopt-domain = { workspace = true }
+llmopt-schemas = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
