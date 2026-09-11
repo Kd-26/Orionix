@@ -1,0 +1,16 @@
+[project]
+name = "llmopt-schemas"
+version = "0.1.0.dev0"
+description = "Versioned Pydantic contracts for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-domain",
+  "pydantic==2.11.7",
+]
+
+[tool.uv.sources]
+llmopt-domain = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
