@@ -1,0 +1,26 @@
+[project]
+name = "llmopt-agent"
+version = "0.1.0.dev0"
+description = "Customer-side execution agent boundary for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-benchmark",
+  "llmopt-capsule",
+  "llmopt-common",
+  "llmopt-integrations",
+  "llmopt-schemas",
+  "llmopt-telemetry",
+  "pydantic==2.11.7",
+]
+
+[tool.uv.sources]
+llmopt-benchmark = { workspace = true }
+llmopt-capsule = { workspace = true }
+llmopt-common = { workspace = true }
+llmopt-integrations = { workspace = true }
+llmopt-schemas = { workspace = true }
+llmopt-telemetry = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
