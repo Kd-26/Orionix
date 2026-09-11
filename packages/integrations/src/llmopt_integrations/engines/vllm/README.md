@@ -1,0 +1,3 @@
+# vLLM engine adapter
+
+**Purpose:** future production engine adapter for the initial certified matrix. **Responsibilities:** validate supported vLLM settings and create typed, allowlisted launch specifications. **Non-responsibilities:** provider provisioning, optimization policy, raw shell execution, or benchmark methodology. **Allowed dependencies:** stable contracts, integration ports, and a future optional pinned vLLM dependency. **Prohibited dependencies:** control-plane/web/database internals and unrelated provider SDKs. **Status:** no implementation or dependency. **Next milestone:** map the approved vLLM subset for H100 single-node execution.
