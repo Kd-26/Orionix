@@ -1,0 +1,3 @@
+# Configuration
+
+**Purpose:** one typed configuration strategy for every Orionix process. **Responsibilities:** safe defaults, environment-specific non-secret TOML overlays, environment-variable overrides, explicit CLI overrides, and secret-safe representation. **Non-responsibilities:** secret storage, credential issuance, business policy, remote configuration, or hot reload. **Allowed dependencies:** `common`, Pydantic, Pydantic Settings, and the standard library. **Prohibited dependencies:** domain behavior, engine/provider SDKs, CUDA, web frameworks, and ORMs. **Status:** settings models and deterministic loading precedence are implemented; no secret-store adapter exists. **Next milestone:** bind these settings into the control-plane and agent composition roots.
