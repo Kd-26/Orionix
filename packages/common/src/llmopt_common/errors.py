@@ -27,3 +27,19 @@ class OptimizationError(LlmOptError):
 
 class CapsuleError(LlmOptError):
     """Execution Capsule metadata or lifecycle operation failed."""
+
+
+class ExecutionError(LlmOptError):
+    """A provider-neutral execution operation failed."""
+
+
+class ProvisioningError(LlmOptError):
+    """A compute provisioning operation failed."""
+
+
+class QualityError(LlmOptError):
+    """Quality validation failed or could not be completed."""
+
+
+class DeploymentExportError(LlmOptError):
+    """Deployment configuration export failed."""
