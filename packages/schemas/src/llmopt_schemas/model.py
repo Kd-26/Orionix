@@ -1,6 +1,7 @@
 """Model metadata contract."""
 
 from enum import StrEnum
+from typing import ClassVar
 
 from pydantic import Field
 
@@ -13,6 +14,9 @@ class ModelTopology(StrEnum):
 
 
 class ModelSpec(ContractModel):
+    SCHEMA_VERSION: ClassVar[str] = "1.0"
+
+    schema_version: str = SCHEMA_VERSION
     model_id: str
     revision: str | None = None
     architecture: str | None = None
