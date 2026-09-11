@@ -1,5 +1,5 @@
 # Integrations
 
-**Purpose:** quarantine vendor-specific engine/provider details behind adapters. **Responsibilities:** future translation between typed Orionix contracts and supported integrations. **Non-responsibilities:** domain policy, candidate selection, orchestration state, or leaking vendor objects across package boundaries. **Allowed dependencies:** `domain`, `schemas`, and integration-specific optional extras only. **Future:** each adapter will be installed independently; the base CPU development environment includes none of them.
+**Purpose:** quarantine engine, execution-provider, cache, and artifact details behind provider-neutral ports. **Responsibilities:** define `ExecutionBackend`, `ProvisioningBackend`, and `EngineAdapter`, then host future adapter implementations. **Non-responsibilities:** domain policy, candidate selection, orchestration state, credentials in workers, or leaking vendor objects. **Allowed dependencies:** `schemas`, standard library, and future adapter-local optional extras. **Prohibited dependencies:** agent/control-plane/web internals, ORMs, unrelated vendor SDKs, and mandatory GPU packages. **Status:** ports and documented namespaces only. **Next milestone:** implement CPU-safe local inspection and then a constrained vLLM adapter.
 
-The namespaces are intentionally empty. No third-party code is vendored.
+No vendor SDK or third-party source is installed or vendored.
