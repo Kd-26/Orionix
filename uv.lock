@@ -9,13 +9,17 @@ members = [
     "llmopt-capsule",
     "llmopt-cli",
     "llmopt-common",
+    "llmopt-config",
     "llmopt-control-plane",
+    "llmopt-deployment",
+    "llmopt-discovery",
     "llmopt-domain",
     "llmopt-integrations",
-    "llmopt-optimization-worker",
     "llmopt-optimizer",
+    "llmopt-quality",
     "llmopt-schemas",
     "llmopt-telemetry",
+    "llmopt-workload",
     "llmopt-workspace",
 ]
 
@@ -410,6 +414,7 @@ dependencies = [
     { name = "llmopt-benchmark" },
     { name = "llmopt-capsule" },
     { name = "llmopt-common" },
+    { name = "llmopt-config" },
     { name = "llmopt-integrations" },
     { name = "llmopt-schemas" },
     { name = "llmopt-telemetry" },
@@ -421,6 +426,7 @@ requires-dist = [
     { name = "llmopt-benchmark", editable = "packages/benchmark" },
     { name = "llmopt-capsule", editable = "packages/capsule" },
     { name = "llmopt-common", editable = "packages/common" },
+    { name = "llmopt-config", editable = "packages/config" },
     { name = "llmopt-integrations", editable = "packages/integrations" },
     { name = "llmopt-schemas", editable = "packages/schemas" },
     { name = "llmopt-telemetry", editable = "packages/telemetry" },
@@ -432,14 +438,14 @@ name = "llmopt-benchmark"
 version = "0.1.0.dev0"
 source = { editable = "packages/benchmark" }
 dependencies = [
-    { name = "llmopt-domain" },
+    { name = "llmopt-common" },
     { name = "llmopt-schemas" },
     { name = "pydantic" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "llmopt-domain", editable = "packages/domain" },
+    { name = "llmopt-common", editable = "packages/common" },
     { name = "llmopt-schemas", editable = "packages/schemas" },
     { name = "pydantic", specifier = "==2.11.7" },
 ]
@@ -449,6 +455,7 @@ name = "llmopt-capsule"
 version = "0.1.0.dev0"
 source = { editable = "packages/capsule" }
 dependencies = [
+    { name = "llmopt-common" },
     { name = "llmopt-domain" },
     { name = "llmopt-schemas" },
     { name = "pydantic" },
@@ -456,6 +463,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "llmopt-common", editable = "packages/common" },
     { name = "llmopt-domain", editable = "packages/domain" },
     { name = "llmopt-schemas", editable = "packages/schemas" },
     { name = "pydantic", specifier = "==2.11.7" },
@@ -480,13 +488,20 @@ requires-dist = [
 name = "llmopt-common"
 version = "0.1.0.dev0"
 source = { editable = "packages/common" }
+
+[[package]]
+name = "llmopt-config"
+version = "0.1.0.dev0"
+source = { editable = "packages/config" }
 dependencies = [
+    { name = "llmopt-common" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "llmopt-common", editable = "packages/common" },
     { name = "pydantic", specifier = "==2.11.7" },
     { name = "pydantic-settings", specifier = "==2.10.1" },
 ]
@@ -509,69 +524,84 @@ requires-dist = [
 ]
 
 [[package]]
+name = "llmopt-deployment"
+version = "0.1.0.dev0"
+source = { editable = "packages/deployment" }
+dependencies = [
+    { name = "llmopt-schemas" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
+
+[[package]]
+name = "llmopt-discovery"
+version = "0.1.0.dev0"
+source = { editable = "packages/discovery" }
+dependencies = [
+    { name = "llmopt-schemas" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
+
+[[package]]
 name = "llmopt-domain"
 version = "0.1.0.dev0"
 source = { editable = "packages/domain" }
+dependencies = [
+    { name = "llmopt-common" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "llmopt-common", editable = "packages/common" }]
 
 [[package]]
 name = "llmopt-integrations"
 version = "0.1.0.dev0"
 source = { editable = "packages/integrations" }
 dependencies = [
-    { name = "llmopt-domain" },
     { name = "llmopt-schemas" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "llmopt-domain", editable = "packages/domain" },
-    { name = "llmopt-schemas", editable = "packages/schemas" },
-]
-provides-extras = ["vllm", "sglang", "tensorrt-llm", "lmcache", "foundry", "gpu"]
-
-[[package]]
-name = "llmopt-optimization-worker"
-version = "0.1.0.dev0"
-source = { editable = "services/optimization-worker" }
-dependencies = [
-    { name = "llmopt-common" },
-    { name = "llmopt-optimizer" },
-    { name = "llmopt-schemas" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "llmopt-common", editable = "packages/common" },
-    { name = "llmopt-optimizer", editable = "packages/optimizer" },
-    { name = "llmopt-schemas", editable = "packages/schemas" },
-]
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
 
 [[package]]
 name = "llmopt-optimizer"
 version = "0.1.0.dev0"
 source = { editable = "packages/optimizer" }
 dependencies = [
-    { name = "llmopt-domain" },
     { name = "llmopt-schemas" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "llmopt-domain", editable = "packages/domain" },
-    { name = "llmopt-schemas", editable = "packages/schemas" },
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
+
+[[package]]
+name = "llmopt-quality"
+version = "0.1.0.dev0"
+source = { editable = "packages/quality" }
+dependencies = [
+    { name = "llmopt-schemas" },
 ]
+
+[package.metadata]
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
 
 [[package]]
 name = "llmopt-schemas"
 version = "0.1.0.dev0"
 source = { editable = "packages/schemas" }
 dependencies = [
+    { name = "llmopt-common" },
     { name = "llmopt-domain" },
     { name = "pydantic" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "llmopt-common", editable = "packages/common" },
     { name = "llmopt-domain", editable = "packages/domain" },
     { name = "pydantic", specifier = "==2.11.7" },
 ]
@@ -580,6 +610,17 @@ requires-dist = [
 name = "llmopt-telemetry"
 version = "0.1.0.dev0"
 source = { editable = "packages/telemetry" }
+
+[[package]]
+name = "llmopt-workload"
+version = "0.1.0.dev0"
+source = { editable = "packages/workload" }
+dependencies = [
+    { name = "llmopt-schemas" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "llmopt-schemas", editable = "packages/schemas" }]
 
 [[package]]
 name = "llmopt-workspace"
