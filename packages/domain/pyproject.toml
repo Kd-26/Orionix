@@ -1,0 +1,10 @@
+[project]
+name = "llmopt-domain"
+version = "0.1.0.dev0"
+description = "Dependency-free domain primitives for Orionix"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
