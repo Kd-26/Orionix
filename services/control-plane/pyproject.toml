@@ -1,0 +1,19 @@
+[project]
+name = "llmopt-control-plane"
+version = "0.1.0.dev0"
+description = "Cloud control-plane boundary for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-common",
+  "llmopt-domain",
+  "llmopt-schemas",
+]
+
+[tool.uv.sources]
+llmopt-common = { workspace = true }
+llmopt-domain = { workspace = true }
+llmopt-schemas = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
