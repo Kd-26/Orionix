@@ -1,0 +1,17 @@
+[project]
+name = "llmopt-config"
+version = "0.1.0.dev0"
+description = "Typed configuration loading for Orionix"
+requires-python = ">=3.12"
+dependencies = [
+  "llmopt-common",
+  "pydantic-settings==2.10.1",
+  "pydantic==2.11.7",
+]
+
+[tool.uv.sources]
+llmopt-common = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
