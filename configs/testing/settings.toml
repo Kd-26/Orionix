@@ -1,0 +1,6 @@
+environment = "testing"
+log_level = "INFO"
+log_format = "console"
+
+[telemetry]
+enabled = false
