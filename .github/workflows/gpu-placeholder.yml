@@ -1,0 +1,13 @@
+name: GPU Tests (Manual Placeholder)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unavailable:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Dedicated GPU runners are intentionally not configured in this milestone."
