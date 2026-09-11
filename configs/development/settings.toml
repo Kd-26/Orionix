@@ -1,0 +1,6 @@
+environment = "development"
+log_level = "DEBUG"
+log_format = "console"
+
+[telemetry]
+enabled = false
