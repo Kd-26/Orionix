@@ -1,0 +1,13 @@
+[project]
+name = "llmopt-deployment"
+version = "0.1.0.dev0"
+description = "Deployment export ports for Orionix"
+requires-python = ">=3.12"
+dependencies = ["llmopt-schemas"]
+
+[tool.uv.sources]
+llmopt-schemas = { workspace = true }
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
