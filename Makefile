@@ -1,8 +1,19 @@
-.PHONY: setup format format-check lint typecheck test test-unit test-contract check security clean
+.PHONY: setup doctor dev-up dev-down format format-check lint typecheck test test-unit test-contract test-integration test-e2e test-gpu-smoke check build security clean
 
 setup:
 	uv sync --all-packages --all-groups
 	uv run pre-commit install
+
+doctor:
+	./scripts/doctor.sh
+
+dev-up:
+	@echo "dev-up is unavailable in this milestone; no local service runtime exists."
+	@false
+
+dev-down:
+	@echo "dev-down is unavailable in this milestone; no local service runtime exists."
+	@false
 
 format:
 	uv run ruff format .
@@ -18,7 +29,7 @@ typecheck:
 	uv run mypy
 
 test:
-	uv run pytest -m "not gpu"
+	uv run pytest -m "not gpu and not performance and not slow"
 
 test-unit:
 	uv run pytest -m unit
@@ -26,7 +37,21 @@ test-unit:
 test-contract:
 	uv run pytest -m contract
 
-check: format-check lint typecheck test
+test-integration:
+	uv run pytest -m integration
+
+test-e2e:
+	@echo "test-e2e is unavailable in this milestone; no end-to-end runtime exists."
+	@false
+
+test-gpu-smoke:
+	uv run pytest -m "gpu and smoke"
+
+check:
+	./scripts/check.sh
+
+build:
+	uv build --all-packages
 
 security:
 	uv export --quiet --all-packages --all-groups --no-hashes --output-file /tmp/llmopt-requirements.txt
