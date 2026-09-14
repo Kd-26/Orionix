@@ -1,3 +1,9 @@
 # LMCache adapter
 
-**Purpose:** reserve cache-policy translation and normalized cache metrics. **Responsibilities:** future LMCache-specific adaptation. **Non-responsibilities:** optimization policy, engine lifecycle, or exposing cache internals. **Allowed dependencies:** stable contracts and a reviewed optional LMCache extra. **Prohibited dependencies:** control-plane, provider SDKs, and unrelated integrations. **Status:** namespace only. **Next milestone:** deferred until baseline vLLM benchmarking is stable.
+- **Purpose:** reserve cache-policy translation and normalized cache metrics.
+- **Future responsibility/port:** implement a cache-adapter port after that provider-neutral port is defined; no cache port exists today.
+- **Composition owner:** agent/engine-worker composition may instantiate it beside an engine adapter.
+- **Constraints:** LMCache remains an optional, reviewed dependency and must honor the selected engine/runtime compatibility fingerprint.
+- **Prohibited leakage:** LMCache types, cache internals, and SDK objects cannot enter optimizer policy, schemas, control-plane logic, or unrelated integrations.
+- **Current status:** boundary only; no LMCache dependency or runtime implementation.
+- **Next milestone:** deferred until reproducible vLLM baseline benchmarking exists.
