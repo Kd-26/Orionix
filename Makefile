@@ -1,4 +1,4 @@
-.PHONY: setup doctor dev-up dev-down format format-check lint typecheck test test-unit test-contract test-integration test-e2e test-gpu-smoke check build security clean
+.PHONY: setup doctor dev-up dev-down format format-check lint typecheck test test-unit test-contract test-integration test-smoke check-imports test-e2e test-gpu-smoke check build security clean
 
 setup:
 	uv sync --all-packages --all-groups
@@ -39,6 +39,12 @@ test-contract:
 
 test-integration:
 	uv run pytest -m integration
+
+test-smoke:
+	uv run pytest tests/smoke
+
+check-imports:
+	uv run pytest tests/smoke/test_imports.py
 
 test-e2e:
 	@echo "test-e2e is unavailable in this milestone; no end-to-end runtime exists."
