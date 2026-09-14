@@ -1,3 +1,9 @@
 # Engine integrations
 
-Engine adapters validate provider-neutral model/hardware/serving contracts and produce typed `EngineLaunchSpec` values. They may depend on `schemas` and the integration ports; optional engine SDKs may be added only inside their adapter extra. They must not expose SDK objects, arbitrary shell commands, orchestration state, credentials, or optimization policy. Status: namespaces only. Next milestone: implement a bounded vLLM adapter after its certified launch surface is approved.
+- **Purpose:** host engine-specific translation behind the provider-neutral `EngineAdapter` port.
+- **Future responsibility/port:** declare engine capabilities, validate model/cluster/serving combinations, and produce typed `EngineLaunchSpec` values.
+- **Composition owner:** the agent or provider-worker composition root selects and instantiates an adapter; optimizers consume only normalized contracts.
+- **Constraints:** vLLM is first intended for production, SGLang is later/beta, and TensorRT-LLM is future. Dependencies are optional and adapter-local.
+- **Prohibited leakage:** SDK objects, shell strings, credentials, orchestration state, benchmark formulas, and optimization policy cannot cross the adapter boundary.
+- **Current status:** namespaces only; no engine or GPU dependency is installed.
+- **Next milestone:** approve a pinned vLLM image and typed capability/launch surface before implementation.
