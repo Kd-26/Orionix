@@ -1,5 +1,9 @@
 # Runpod execution
 
-Runpod Pods run a supplied container image; Docker Compose and nested Docker are not assumed inside a Pod. The future image includes the agent supervisor, engine environment, benchmark runner, and metrics collector. Persistent data commonly lives under the provider-mounted workspace path. Instance, datacenter, storage type, physical GPU, driver, and CUDA values enter the environment fingerprint.
-
-Provisioning credentials stay in the control plane, never the execution worker. Initial certification targets the provider's production-oriented cloud class. Provider SDK types remain inside this adapter. Status: schemas/docs only; no SDK/API dependency or call. Next milestone: design credential-scoped provisioning and cancellation tests against a fake transport.
+- **Purpose:** adapt Runpod Pod allocation and execution semantics.
+- **Future responsibility/ports:** control-plane-side logic implements `ProvisioningBackend`; the supplied worker image implements `ExecutionBackend` lifecycle behavior.
+- **Composition owner:** the control plane instantiates provisioning; the ephemeral worker composition root instantiates execution.
+- **Constraints:** a Pod is already a provider-managed container, so nested Docker and Docker Compose are never assumed. Datacenter, storage type, physical GPU facts, driver, CUDA, image, and mounted workspace semantics enter the fingerprint.
+- **Prohibited leakage:** provisioning credentials, provider SDK objects, raw resource identifiers, and provider fields cannot enter workers, benchmark configuration, domain contracts, or optimizer policy. Workers receive only narrow job credentials.
+- **Current status:** boundary only; no Runpod SDK, API call, allocation, image, worker, or runtime behavior.
+- **Next milestone:** specify fake-backed credential scope, cancellation, termination, reconciliation, and orphan-cleanup tests.
