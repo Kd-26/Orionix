@@ -23,6 +23,22 @@ ALLOWED_INTERNAL_IMPORTS = {
     "llmopt_telemetry": set(),
     "llmopt_deployment": {"llmopt_schemas"},
     "llmopt_integrations": {"llmopt_schemas"},
+    "llmopt_agent": {
+        "llmopt_benchmark",
+        "llmopt_capsule",
+        "llmopt_common",
+        "llmopt_config",
+        "llmopt_integrations",
+        "llmopt_schemas",
+        "llmopt_telemetry",
+    },
+    "llmopt_cli": {"llmopt_common"},
+    "llmopt_control_plane": {"llmopt_common", "llmopt_domain", "llmopt_schemas"},
+}
+
+ALLOWED_INTERNAL_DEPENDENCIES = {
+    import_name.replace("_", "-"): {dependency.replace("_", "-") for dependency in dependencies}
+    for import_name, dependencies in ALLOWED_INTERNAL_IMPORTS.items()
 }
 
 
@@ -81,3 +97,24 @@ def test_workspace_dependency_graph_is_acyclic() -> None:
 
     for package in graph:
         visit(package)
+
+
+@pytest.mark.integration
+def test_declared_workspace_dependencies_follow_architecture() -> None:
+    graph: dict[str, set[str]] = {}
+    for manifest in ROOT.glob("**/pyproject.toml"):
+        if ".venv" in manifest.parts or manifest == ROOT / "pyproject.toml":
+            continue
+        project = tomllib.loads(manifest.read_text(encoding="utf-8"))["project"]
+        graph[project["name"]] = {
+            dependency.split("=", maxsplit=1)[0]
+            for dependency in project.get("dependencies", ())
+            if dependency.startswith("llmopt-")
+        }
+
+    assert graph.keys() == ALLOWED_INTERNAL_DEPENDENCIES.keys()
+    for package, dependencies in graph.items():
+        allowed = ALLOWED_INTERNAL_DEPENDENCIES[package]
+        assert dependencies <= allowed, (
+            f"{package} declares prohibited dependencies: {dependencies - allowed}"
+        )
