@@ -1,5 +1,7 @@
 # Data flow
 
-The intended flow is model/hardware/workload/SLO and quality input → environment inspection → capability filtering → candidate planning → customer/provider-side benchmark → independent result and quality validation → Pareto ranking → serving configuration, Execution Capsule metadata, and reviewable deployment export → scheduled revalidation with manual approval.
+The intended flow is model/workload/SLO/quality/cost input → execution-side environment and model inspection → representability, engine-compatibility, and certification evaluation → controlled baseline → feasible candidate planning → execution-side benchmark → independent constraint and quality validation → Pareto ranking → independent finalist confirmation → report, layered Execution Capsule metadata, and reviewable deployment export → optional scheduled revalidation with manual approval.
 
-Only explicit, allowlisted metadata may eventually return to the control plane. Model weights, prompts, evaluation datasets, raw benchmark payloads, and engine process details stay customer-side by default. Commands and transitions use versioned envelopes, leases, idempotency keys, and stable identifiers. There is no network or orchestration implementation in this milestone.
+The [canonical workflow](product-workflow.md) defines inputs, outputs, owner, trust boundary, failure behavior, and egress for all 18 steps. The [customer data boundary](../security/customer-data-boundaries.md) is the authoritative transfer allowlist.
+
+Commands and transitions use versioned envelopes, narrow credentials, leases, expirations, idempotency keys, and stable identifiers. Agent connections are outbound-only by default. No network, provisioning, GPU, engine, benchmark, optimizer, quality, persistence, deployment, or UI implementation exists in this milestone.
