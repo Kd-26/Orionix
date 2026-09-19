@@ -1,6 +1,11 @@
 # Capability-adaptive domain model
 
-This document freezes conceptual requirements for subsequent versioned contracts. It does not claim that these schemas or discovery implementations exist today. Unknown facts remain unknown; reported, measured, and inferred values carry source and confidence.
+This document freezes the capability model. Day 3 implements the core versioned
+accelerator, node, interconnect, cluster, software-environment, model, workload,
+requirement, job, candidate, benchmark, recommendation, and capsule contracts.
+Discovery and derived capability evaluation remain unimplemented. Unknown facts
+remain unknown; reported, measured, and inferred values carry source and
+confidence.
 
 ## Required contracts
 

@@ -1,12 +1,14 @@
 # Current milestone and decision register
 
-**Current milestone: Day 2 monorepo and package-boundary foundation.** Day 1 product and capability-adaptive architecture decisions remain frozen below.
+**Current milestone: Day 3 shared data formats.** Day 1 product decisions and Day 2 package boundaries remain frozen below.
 
 ## Implemented foundation
 
 - Python 3.12 uv workspace with one lockfile, 16 src-layout distributions, synchronized pre-production versions, and PEP 561 markers.
 - Explicit package/import mappings, direct-dependency allowlists, static import-direction and cycle checks, and CPU-only smoke imports for every distribution and integration namespace.
 - Typed/versioned bootstrap contracts, configuration/error/logging conventions, provider/engine ports, CLI/help shell, CI, and development documentation inherited from the repository foundation.
+- Capability-adaptive accelerator, node, interconnect, cluster, software, model, workload, requirement, job, candidate, benchmark, recommendation, and capsule contracts with synthetic golden JSON examples.
+- Strict schema-version handling: missing or mismatched versions fail instead of being silently interpreted as current data.
 
 ## Frozen architecture decisions
 
@@ -33,8 +35,8 @@ Cloud provisioning; agent networking; NVIDIA/NVML discovery; Docker/GPU access; 
 
 ## Delivery sequence
 
-1. Capability and cluster contract schemas with golden fixtures.
-2. Control-plane persistence/authorization boundaries and secure fake-backed agent protocol.
+1. **Complete:** capability and cluster contract schemas with golden fixtures.
+2. **Next:** control-plane persistence/authorization boundaries and secure fake-backed agent protocol.
 3. Local CPU-safe discovery, then gated NVIDIA/topology discovery and constrained vLLM lifecycle.
 4. Reproducible baseline/candidate benchmarking and canonical metrics.
 5. Feasible candidate generation, bounded optimization, constraints, quality, and Pareto confirmation.

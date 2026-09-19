@@ -11,8 +11,10 @@ All notable changes will be documented here. This project follows semantic versi
 - Explicit provider/engine boundaries, dependency tests, environment documentation, and operational/security launch criteria.
 - Day 1 product contract covering the first customer, canonical workflow, capability-adaptive cluster model, support states, layered invalidation, certification evidence, risk register, measurable launch gates, and open-decision owners.
 - Day 2 package-boundary hardening with PEP 561 markers, manifest allowlist enforcement, integration-namespace smoke coverage, and focused workspace validation targets.
+- Day 3 shared accelerator, node, cluster, software, model, workload, requirement, job, candidate, benchmark, recommendation, and capsule formats with synthetic golden JSON examples.
 
 ### Changed
 
 - Benchmark result and Execution Capsule bootstrap contracts advance to schema `2.0` while the repository remains pre-production; other new top-level contracts begin at schema `1.0`.
 - Product support is defined by versioned evidence-backed profiles rather than a primary GPU name; reference hardware is an operational fixture only.
+- Saved contracts now require an explicit exact schema version; missing and mismatched versions fail validation.
