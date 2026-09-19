@@ -59,13 +59,31 @@ def _internal_imports(path: Path) -> set[str]:
     return imported
 
 
+def _assert_imports_follow_policy(package: str, package_root: Path) -> None:
+    allowed = ALLOWED_INTERNAL_IMPORTS[package]
+    actual = set().union(*(_internal_imports(path) for path in package_root.rglob("*.py")))
+    actual.discard(package)
+    prohibited = actual - allowed
+    assert not prohibited, f"{package} imports prohibited packages: {prohibited}"
+
+
 @pytest.mark.integration
 def test_stable_package_import_direction() -> None:
-    for package, allowed in ALLOWED_INTERNAL_IMPORTS.items():
+    for package in ALLOWED_INTERNAL_IMPORTS:
         package_root = next(ROOT.glob(f"**/src/{package}"))
-        actual = set().union(*(_internal_imports(path) for path in package_root.rglob("*.py")))
-        actual.discard(package)
-        assert actual <= allowed, f"{package} imports prohibited packages: {actual - allowed}"
+        _assert_imports_follow_policy(package, package_root)
+
+
+@pytest.mark.integration
+def test_dependency_guard_rejects_a_deliberate_forbidden_import(tmp_path: Path) -> None:
+    package_root = tmp_path / "llmopt_common"
+    package_root.mkdir()
+    (package_root / "forbidden.py").write_text(
+        "from llmopt_optimizer import CandidateGenerator\n", encoding="utf-8"
+    )
+
+    with pytest.raises(AssertionError, match="llmopt_optimizer"):
+        _assert_imports_follow_policy("llmopt_common", package_root)
 
 
 @pytest.mark.integration
