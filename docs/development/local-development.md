@@ -13,4 +13,9 @@ uv run llmopt --help
 
 Common commands are `make format`, `make lint`, `make typecheck`, `make test`, `make test-unit`, `make test-contract`, `make test-integration`, `make test-gpu-smoke`, `make check`, `make build`, and `make clean`.
 
+`make check` is the single pre-review CPU gate: it validates source quality,
+types, tests, internal documentation links, package builds, and typed wheel
+contents. `make build` remains available when only package artifacts need to be
+rebuilt and inspected.
+
 Five environments are documented: local CPU development; CPU-only pull-request CI; dedicated Ubuntu/NVIDIA GPU development; production-like staging control plane plus staging GPU agent; and isolated pilot production. Only the first two are currently configured. `dev-up`, `dev-down`, and `test-e2e` deliberately return unavailable until a real runtime exists.

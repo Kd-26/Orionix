@@ -2,6 +2,22 @@
 
 Risks are reviewed at each phase gate and before any support-profile status changes. Likelihood and impact are qualitative until operational evidence exists.
 
+## Three assumptions to validate first
+
+These are the three highest-risk startup assumptions. They must be tested with
+real access or customer evidence rather than treated as facts.
+
+| Assumption | Why it could block the product | Validation required | Owner / deadline | Current state |
+|---|---|---|---|---|
+| Orionix can repeatedly access an affordable NVIDIA GPU profile suitable for certification | Without repeatable access, benchmark results, failure tests, and release evidence cannot be reproduced | Reserve or obtain the same model/GPU/software profile for repeated baseline, failure, and confirmation runs; record availability and monthly budget | Platform + product / before GPU implementation | Open |
+| One pinned vLLM image is compatible and stable for the first model/GPU profile | A generally supported model can still fail because of the exact driver, CUDA, PyTorch, NCCL, kernel, or vLLM combination | Pin the image digest and full software fingerprint; pass clean startup, inference, benchmark, cancellation, and soak tests | Runtime lead / before first certified profile | Open |
+| Target customers will install a narrowly scoped outbound Orionix agent in their environment | If customers reject the trust model, the customer-side execution architecture and onboarding flow must change | Conduct at least five interviews; show permissions, outbound endpoints, collected data, uninstall steps, and threat model; obtain two design-partner approvals | Product + security / before agent networking | Open |
+
+If any assumption fails, narrow or change the launch plan before adding dependent
+runtime behavior. Do not compensate by weakening security or certification gates.
+
+## Product and delivery risks
+
 | Risk | Likelihood / impact | Mitigation and trigger | Evidence owner | Current state |
 |---|---|---|---|---|
 | Capability claims exceed evidence | High / Critical | Central support registry; block claims without profile evidence; trigger on docs/release changes | Product + certification owner | Open |

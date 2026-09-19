@@ -28,7 +28,7 @@ make check
 uv run llmopt --help
 ```
 
-`make setup` installs the locked CPU-only workspace. `make check-imports` verifies all 16 distributions and the provider/engine namespaces without loading optional SDKs. `make test-smoke` runs all CPU-safe package and CLI smoke checks.
+`make setup` installs the locked CPU-only workspace. `make check-imports` verifies all 16 distributions and the provider/engine namespaces without loading optional SDKs. `make test-smoke` runs all CPU-safe package and CLI smoke checks. `make check` additionally validates the lockfile, formatting, linting, types, CPU test suite, internal documentation links, all package builds, and typed wheel contents.
 
 See [product scope](docs/product-scope.md), [support status](docs/supported-matrix.md), [customer workflow](docs/architecture/product-workflow.md), [architecture](docs/architecture/overview.md), [local development](docs/development/local-development.md), and [security](SECURITY.md).
 
