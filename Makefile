@@ -58,6 +58,7 @@ check:
 
 build:
 	uv build --all-packages
+	uv run python scripts/check_build_artifacts.py .
 
 security:
 	uv export --quiet --all-packages --all-groups --no-hashes --output-file /tmp/llmopt-requirements.txt
