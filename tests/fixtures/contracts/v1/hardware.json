@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "cluster": {
+    "schema_version": "1.0",
+    "cluster_id": "cluster-cpu-safe-01",
+    "nodes": [
+      {
+        "schema_version": "1.0",
+        "node_id": "node-cpu-safe-01",
+        "cpu_architecture": "x86_64",
+        "cpu_count": 8,
+        "ram_bytes": 17179869184,
+        "operating_system": "synthetic-linux"
+      }
+    ],
+    "accelerator_count": 0,
+    "homogeneous": true,
+    "cluster_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "software": {
+    "schema_version": "1.0",
+    "operating_system": "synthetic-linux",
+    "engine_name": "placeholder"
+  }
+}

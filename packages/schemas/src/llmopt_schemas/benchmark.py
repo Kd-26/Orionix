@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import ClassVar
 
 from llmopt_common import BenchmarkRunId, ConfigurationId
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from llmopt_schemas.base import ContractModel
 
@@ -25,6 +25,15 @@ class BenchmarkErrorRecord(ContractModel):
     category: str
     count: int = Field(ge=1)
     sanitized_message: str | None = None
+
+
+class ArtifactReference(ContractModel):
+    artifact_id: str = Field(min_length=1)
+    kind: str = Field(min_length=1)
+    reference: str = Field(min_length=1)
+    digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    media_type: str | None = None
+    redacted: bool = True
 
 
 class BenchmarkResult(ContractModel):
@@ -50,6 +59,7 @@ class BenchmarkResult(ContractModel):
     failed_request_count: int = Field(default=0, ge=0)
     cancelled_request_count: int = Field(default=0, ge=0)
     errors: tuple[BenchmarkErrorRecord, ...] = ()
+    artifacts: tuple[ArtifactReference, ...] = ()
     oom_events: int = Field(default=0, ge=0)
     provisioning_duration_seconds: float | None = Field(default=None, ge=0)
     cold_start_duration_seconds: float | None = Field(default=None, ge=0)
@@ -59,3 +69,14 @@ class BenchmarkResult(ContractModel):
     workload_fingerprint: str
     partial: bool = False
     started_at: datetime | None = None
+    finished_at: datetime | None = None
+
+    @model_validator(mode="after")
+    def validate_timestamps(self) -> "BenchmarkResult":
+        if (
+            self.started_at is not None
+            and self.finished_at is not None
+            and self.finished_at < self.started_at
+        ):
+            raise ValueError("benchmark finish time cannot precede start time")
+        return self

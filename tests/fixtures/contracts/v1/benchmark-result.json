@@ -1,0 +1,59 @@
+{
+  "schema_version": "2.0",
+  "run_id": "00000000-0000-0000-0000-000000000005",
+  "configuration_id": "00000000-0000-0000-0000-000000000004",
+  "ttft_ms": {
+    "p50": 120.0,
+    "p95": 240.0,
+    "p99": 300.0
+  },
+  "tpot_ms": {
+    "p50": 20.0,
+    "p95": 35.0,
+    "p99": 45.0
+  },
+  "end_to_end_latency_ms": {
+    "p50": 1400.0,
+    "p95": 2800.0,
+    "p99": 3200.0
+  },
+  "generated_tokens_per_second": 150.0,
+  "total_tokens_per_second": 300.0,
+  "requests_per_second": 2.5,
+  "goodput_requests_per_second": 2.4,
+  "gpu_utilization_ratio": {
+    "p50": 0.75,
+    "p95": 0.9,
+    "p99": 0.95
+  },
+  "vram_utilization_ratio": {
+    "p50": 0.7,
+    "p95": 0.85,
+    "p99": 0.88
+  },
+  "cost_per_token_usd": 0.00005,
+  "total_cost_usd": 0.25,
+  "generated_token_count": 9000,
+  "total_token_count": 18000,
+  "completed_request_count": 150,
+  "failed_request_count": 0,
+  "cancelled_request_count": 0,
+  "errors": [],
+  "artifacts": [
+    {
+      "artifact_id": "aggregate-metrics",
+      "kind": "benchmark-summary",
+      "reference": "customer-artifact://benchmark/run-0005/summary.json",
+      "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "media_type": "application/json",
+      "redacted": true
+    }
+  ],
+  "oom_events": 0,
+  "duration_seconds": 60.0,
+  "environment_fingerprint": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+  "workload_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "partial": false,
+  "started_at": "2026-01-01T00:00:00Z",
+  "finished_at": "2026-01-01T00:01:00Z"
+}

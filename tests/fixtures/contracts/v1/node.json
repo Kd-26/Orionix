@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "node_id": "node-synthetic-01",
+  "roles": ["worker"],
+  "cpu_architecture": "x86_64",
+  "cpu_count": 64,
+  "ram_bytes": 549755813888,
+  "storage": [
+    {
+      "storage_id": "local-model-cache",
+      "capacity_bytes": 1099511627776,
+      "storage_class": "local-nvme",
+      "filesystem_type": "ext4"
+    }
+  ],
+  "accelerators": [
+    {
+      "schema_version": "1.0",
+      "vendor": "nvidia",
+      "device_name": "Synthetic Future GPU",
+      "device_identifier_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "architecture_family": "future_architecture_x",
+      "compute_capability": "future",
+      "vram_bytes": 85899345920,
+      "supported_numeric_formats": ["fp32", "tf32", "fp16", "bf16", "fp8"]
+    },
+    {
+      "schema_version": "1.0",
+      "vendor": "nvidia",
+      "device_name": "Synthetic Future GPU",
+      "device_identifier_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "architecture_family": "future_architecture_x",
+      "compute_capability": "future",
+      "vram_bytes": 85899345920,
+      "supported_numeric_formats": ["fp32", "tf32", "fp16", "bf16", "fp8"]
+    }
+  ],
+  "numa_topology": {
+    "node_count": 2
+  },
+  "network_interfaces": [
+    {
+      "interface_id": "fabric-0",
+      "link_type": "ethernet",
+      "speed_gbps": {
+        "value": 100.0,
+        "source": "reported",
+        "confidence": 0.9
+      },
+      "rdma_capable": false
+    }
+  ],
+  "operating_system": "ubuntu",
+  "operating_system_version": "24.04",
+  "container_runtime": "docker",
+  "healthy": true
+}

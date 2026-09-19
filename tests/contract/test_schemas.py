@@ -1,16 +1,17 @@
-"""Initial schema construction and invariant tests."""
+"""Schema invariants that are independent of golden serialization examples."""
 
-from datetime import UTC, datetime
-from uuid import uuid4
+import json
+from pathlib import Path
 
 import pytest
 from llmopt_benchmark import BenchmarkEnvironment, BenchmarkPlan, BenchmarkRun
 from llmopt_capsule import ExecutionCapsuleManifest
-from llmopt_common import CapsuleId, ConfigurationId
 from llmopt_schemas import (
     AgentCapabilities,
     AgentCommand,
     BenchmarkResult,
+    CandidateConfiguration,
+    ClusterSpec,
     CompatibilityFingerprint,
     ComputeStatus,
     ComputeTarget,
@@ -22,45 +23,44 @@ from llmopt_schemas import (
     ExecutionRequest,
     HardwareSpec,
     JobStateTransition,
-    MetricDistribution,
     ModelSpec,
+    OptimizationJobSpec,
     OptimizationRequest,
+    OptimizationRequirements,
     OptimizationResult,
     PreparedEnvironment,
     ProvisioningRequest,
     QualityConstraint,
     QualityEvaluation,
+    Recommendation,
     ServingConfig,
     SLOSpec,
+    SoftwareEnvironmentSpec,
     TokenDistribution,
     WorkloadSpec,
 )
 from pydantic import ValidationError
 
+FIXTURES = Path(__file__).parents[1] / "fixtures" / "contracts" / "v1"
+
+
+def _load(name: str) -> dict[str, object]:
+    payload: object = json.loads((FIXTURES / name).read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
 
 @pytest.mark.contract
-def test_core_schemas_instantiate() -> None:
-    workload = WorkloadSpec(
-        input_tokens=TokenDistribution(p50=128, p95=1024, max=4096),
-        output_tokens=TokenDistribution(p50=64, p95=256, max=1024),
-    )
-    result = BenchmarkResult(
-        configuration_id=ConfigurationId(uuid4()),
-        ttft_ms=MetricDistribution(p50=20, p95=50, p99=80),
-        tpot_ms=MetricDistribution(p50=5, p95=8),
-        generated_tokens_per_second=100,
-        total_tokens_per_second=200,
-        requests_per_second=10,
-        goodput_requests_per_second=9,
-        duration_seconds=60,
-        environment_fingerprint="sha256:environment",
-        workload_fingerprint="sha256:workload",
-    )
+def test_core_schemas_load_golden_examples() -> None:
+    workload = WorkloadSpec.model_validate(_load("workload.json"))
+    result = BenchmarkResult.model_validate(_load("benchmark-result.json"))
+    model = ModelSpec.model_validate(_load("model.json"))
+    hardware = HardwareSpec.model_validate(_load("hardware.json"))
 
-    assert workload.schema_version == "1.0"
+    assert workload.streaming is True
     assert result.schema_version == "2.0"
-    assert ModelSpec(model_id="synthetic/test").model_id == "synthetic/test"
-    assert HardwareSpec().gpu_count == 0
+    assert model.revision == "revision-0001"
+    assert hardware.cluster.accelerator_count == 0
 
 
 @pytest.mark.contract
@@ -71,35 +71,10 @@ def test_distribution_order_is_validated() -> None:
 
 @pytest.mark.contract
 def test_execution_capsule_is_metadata_only() -> None:
-    manifest = ExecutionCapsuleManifest(
-        capsule_id=CapsuleId(uuid4()),
-        created_at=datetime.now(UTC),
-        compatibility=CompatibilityFingerprint(
-            model_hash="sha256:model",
-            execution_backend="local_host",
-            engine="placeholder",
-            capsule_schema_version="2.0",
-        ),
-        serving_configuration=ServingConfig(engine="placeholder"),
-        workload_assumptions=WorkloadSpec(
-            input_tokens=TokenDistribution(p50=1, p95=2, max=4),
-            output_tokens=TokenDistribution(p50=1, p95=2, max=4),
-        ),
-        slo=SLOSpec(),
-    )
+    manifest = ExecutionCapsuleManifest.model_validate(_load("execution-capsule.json"))
 
     assert manifest.schema_version == "2.0"
     assert manifest.compilation_artifacts == ()
-
-
-@pytest.mark.contract
-def test_contract_round_trip_preserves_schema_version() -> None:
-    model = ModelSpec(model_id="synthetic/test", parameter_count=1)
-
-    restored = ModelSpec.model_validate_json(model.model_dump_json())
-
-    assert restored == model
-    assert restored.schema_version == "1.0"
 
 
 @pytest.mark.contract
@@ -112,6 +87,8 @@ def test_contract_round_trip_preserves_schema_version() -> None:
         BenchmarkPlan,
         BenchmarkResult,
         BenchmarkRun,
+        CandidateConfiguration,
+        ClusterSpec,
         CompatibilityFingerprint,
         ComputeStatus,
         ComputeTarget,
@@ -125,14 +102,18 @@ def test_contract_round_trip_preserves_schema_version() -> None:
         HardwareSpec,
         JobStateTransition,
         ModelSpec,
+        OptimizationJobSpec,
         OptimizationRequest,
+        OptimizationRequirements,
         OptimizationResult,
         PreparedEnvironment,
         ProvisioningRequest,
         QualityConstraint,
         QualityEvaluation,
+        Recommendation,
         SLOSpec,
         ServingConfig,
+        SoftwareEnvironmentSpec,
         WorkloadSpec,
     ),
 )

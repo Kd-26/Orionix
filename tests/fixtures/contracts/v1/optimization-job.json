@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "job_id": "00000000-0000-0000-0000-000000000003",
+  "owner": {
+    "organization_id": "00000000-0000-0000-0000-000000000001",
+    "project_id": "00000000-0000-0000-0000-000000000002",
+    "principal_identifier_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "request": {
+    "schema_version": "1.0",
+    "job_id": "00000000-0000-0000-0000-000000000003",
+    "model": {
+      "schema_version": "1.0",
+      "model_id": "synthetic/tiny-instruct",
+      "revision": "revision-0001",
+      "architecture": "SyntheticForCausalLM",
+      "parameter_count": 1000000,
+      "model_type": "synthetic",
+      "dense_or_moe": "dense",
+      "num_layers": 4,
+      "context_length": 8192,
+      "dtype": "bfloat16",
+      "tokenizer_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "model_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "hardware": {
+      "schema_version": "1.0",
+      "cluster": {
+        "schema_version": "1.0",
+        "cluster_id": "cluster-cpu-safe-01",
+        "nodes": [
+          {
+            "schema_version": "1.0",
+            "node_id": "node-cpu-safe-01",
+            "cpu_architecture": "x86_64",
+            "cpu_count": 8,
+            "ram_bytes": 17179869184,
+            "operating_system": "synthetic-linux"
+          }
+        ],
+        "accelerator_count": 0,
+        "homogeneous": true,
+        "cluster_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "software": {
+        "schema_version": "1.0",
+        "operating_system": "synthetic-linux",
+        "engine_name": "placeholder"
+      }
+    },
+    "workload": {
+      "schema_version": "1.0",
+      "input_tokens": {
+        "p50": 128,
+        "p95": 1024,
+        "max": 4096
+      },
+      "output_tokens": {
+        "p50": 64,
+        "p95": 256,
+        "max": 1024
+      },
+      "concurrency": {
+        "median": 4,
+        "peak": 16
+      },
+      "request_rate": {
+        "average": 2.0,
+        "peak": 8.0
+      },
+      "streaming": true,
+      "workload_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "requirements": {
+      "schema_version": "1.0",
+      "objective": {
+        "identifier": "MAXIMIZE_GOODPUT"
+      },
+      "slo": {
+        "schema_version": "1.0",
+        "p95_ttft_ms": 500.0,
+        "p95_tpot_ms": 50.0,
+        "minimum_throughput_tokens_per_second": 100.0,
+        "maximum_error_rate": 0.01
+      },
+      "experiment_budget": {
+        "maximum_candidates": 20,
+        "maximum_elapsed_seconds": 7200.0,
+        "maximum_gpu_hours": 4.0,
+        "maximum_cost_usd": 25.0
+      }
+    }
+  },
+  "state": "PENDING",
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-01T00:00:00Z"
+}

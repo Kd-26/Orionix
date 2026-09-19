@@ -1,0 +1,106 @@
+{
+  "schema_version": "2.0",
+  "capsule_id": "00000000-0000-0000-0000-000000000006",
+  "state": "CREATED",
+  "created_at": "2026-01-01T00:05:00Z",
+  "compatibility": {
+    "schema_version": "1.0",
+    "model_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "model_revision": "revision-0001",
+    "execution_backend": "local_host",
+    "physical_gpu_model": "Synthetic Future GPU",
+    "gpu_architecture": "future_architecture_x",
+    "gpu_count": 2,
+    "vram_bytes_per_gpu": 85899345920,
+    "gpu_topology": "two-device-nvlink",
+    "cpu_count": 64,
+    "ram_bytes": 549755813888,
+    "cuda_version": "synthetic-cuda",
+    "driver_version": "synthetic-driver",
+    "pytorch_version": "synthetic-pytorch",
+    "engine": "vllm",
+    "engine_version": "pinned-version-pending",
+    "engine_image_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "precision": "bfloat16",
+    "parallelism": {
+      "dp": 1,
+      "tp": 2,
+      "pp": 1,
+      "ep": 1
+    },
+    "capsule_schema_version": "2.0"
+  },
+  "serving_configuration": {
+    "schema_version": "1.0",
+    "engine": "vllm",
+    "parallelism": {
+      "dp": 1,
+      "tp": 2,
+      "pp": 1,
+      "ep": 1
+    },
+    "precision": "bfloat16",
+    "batching": {
+      "max_sequences": 16,
+      "max_batch_tokens": 8192
+    },
+    "prefix_cache": {
+      "enabled": true
+    },
+    "memory": {
+      "gpu_memory_utilization_ratio": 0.9
+    }
+  },
+  "workload_assumptions": {
+    "schema_version": "1.0",
+    "input_tokens": {
+      "p50": 128,
+      "p95": 1024,
+      "max": 4096
+    },
+    "output_tokens": {
+      "p50": 64,
+      "p95": 256,
+      "max": 1024
+    },
+    "concurrency": {
+      "median": 4,
+      "peak": 16
+    },
+    "request_rate": {
+      "average": 2.0,
+      "peak": 8.0
+    },
+    "streaming": true,
+    "workload_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "slo": {
+    "schema_version": "1.0",
+    "p95_ttft_ms": 500.0,
+    "p95_tpot_ms": 50.0,
+    "minimum_throughput_tokens_per_second": 100.0,
+    "maximum_error_rate": 0.01
+  },
+  "quality_constraints": [],
+  "engine_metadata": {
+    "image_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "benchmark_evidence": [
+    "00000000-0000-0000-0000-000000000005"
+  ],
+  "compilation_artifacts": [],
+  "graph_artifacts": [],
+  "memory_layout": {
+    "kv_cache_layout_version": "synthetic-v1"
+  },
+  "scheduler_policy": {
+    "policy": "fcfs"
+  },
+  "cache_policy": {
+    "prefix_cache": true
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "manifest_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+  }
+}

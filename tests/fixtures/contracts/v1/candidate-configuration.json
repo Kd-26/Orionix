@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "configuration_id": "00000000-0000-0000-0000-000000000004",
+  "configuration": {
+    "schema_version": "1.0",
+    "engine": "vllm",
+    "parallelism": {
+      "dp": 1,
+      "tp": 2,
+      "pp": 1,
+      "ep": 1
+    },
+    "precision": "bfloat16",
+    "batching": {
+      "max_sequences": 16,
+      "max_batch_tokens": 8192
+    },
+    "kv_cache": {
+      "dtype": "bfloat16"
+    },
+    "prefix_cache": {
+      "enabled": true
+    },
+    "memory": {
+      "gpu_memory_utilization_ratio": 0.9
+    }
+  },
+  "generation_reason": "Fits the two-device cluster and preserves memory for KV cache.",
+  "required_capabilities": ["tensor-parallel", "peer-to-peer"]
+}

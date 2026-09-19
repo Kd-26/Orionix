@@ -1,8 +1,10 @@
 """Provider and engine ports remain implementable without vendor dependencies."""
 
 import asyncio
+import json
 from collections.abc import AsyncIterator
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pytest
 from llmopt_domain import ComputeState
@@ -23,6 +25,14 @@ from llmopt_schemas import (
 )
 from llmopt_schemas.execution import ExecutionRequest
 
+FIXTURES = Path(__file__).parents[1] / "fixtures" / "contracts" / "v1"
+
+
+def _load_contract(name: str) -> dict[str, object]:
+    payload: object = json.loads((FIXTURES / name).read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
 
 class StubEngineAdapter:
     def validate_config(
@@ -40,12 +50,12 @@ class StubEngineAdapter:
         config: ServingConfig,
     ) -> EngineLaunchSpec:
         del model, config
-        return EngineLaunchSpec(executable="engine", argv=("serve",))
+        return EngineLaunchSpec(schema_version="1.0", executable="engine", argv=("serve",))
 
 
 class StubExecutionBackend:
     async def inspect(self) -> HardwareSpec:
-        return HardwareSpec()
+        return HardwareSpec.model_validate(_load_contract("hardware.json"))
 
     async def prepare(self, request: ExecutionRequest) -> PreparedEnvironment:
         raise NotImplementedError(request)
@@ -59,7 +69,9 @@ class StubExecutionBackend:
 
     async def stream_events(self, handle: EngineHandle) -> AsyncIterator[EngineEvent]:
         if False:
-            yield EngineEvent(occurred_at=datetime.now(UTC), event_type="ready")
+            yield EngineEvent(
+                schema_version="1.0", occurred_at=datetime.now(UTC), event_type="ready"
+            )
         del handle
 
     async def stop_engine(self, handle: EngineHandle) -> None:
@@ -72,11 +84,15 @@ class StubExecutionBackend:
 class StubProvisioningBackend:
     async def provision(self, request: ProvisioningRequest) -> ComputeTarget:
         return ComputeTarget(
-            target_id=str(request.job_id), backend=request.backend, state=ComputeState.READY
+            schema_version="1.0",
+            target_id=str(request.job_id),
+            backend=request.backend,
+            state=ComputeState.READY,
         )
 
     async def status(self, target: ComputeTarget) -> ComputeStatus:
         return ComputeStatus(
+            schema_version="1.0",
             target_id=target.target_id,
             state=target.state,
             observed_at=datetime.now(UTC),
@@ -94,9 +110,9 @@ provisioning_backend: ProvisioningBackend = StubProvisioningBackend()
 @pytest.mark.integration
 def test_engine_port_accepts_a_trivial_double() -> None:
     result = engine_adapter.validate_config(
-        ModelSpec(model_id="synthetic/test"),
-        HardwareSpec(),
-        ServingConfig(engine="stub"),
+        ModelSpec.model_validate(_load_contract("model.json")),
+        HardwareSpec.model_validate(_load_contract("hardware.json")),
+        ServingConfig(schema_version="1.0", engine="stub"),
     )
 
     assert result.valid
@@ -105,4 +121,4 @@ def test_engine_port_accepts_a_trivial_double() -> None:
 
 @pytest.mark.integration
 def test_execution_port_accepts_a_trivial_double() -> None:
-    assert asyncio.run(execution_backend.inspect()).gpu_count == 0
+    assert asyncio.run(execution_backend.inspect()).cluster.accelerator_count == 0

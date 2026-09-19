@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "vendor": "nvidia",
+  "device_name": "Synthetic Future GPU",
+  "device_identifier_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "architecture_family": "future_architecture_x",
+  "compute_capability": "future",
+  "vram_bytes": 85899345920,
+  "memory_bandwidth_gbps": {
+    "value": 3000.0,
+    "source": "reported",
+    "confidence": 0.8
+  },
+  "supported_numeric_formats": ["fp32", "tf32", "fp16", "bf16", "fp8"],
+  "power_limit_watts": {
+    "value": 700.0,
+    "source": "reported",
+    "confidence": 0.9
+  },
+  "feature_metadata": {
+    "cuda_graphs_reported": true
+  }
+}

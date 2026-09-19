@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "job_id": "00000000-0000-0000-0000-000000000003",
+  "winning_configuration_id": "00000000-0000-0000-0000-000000000004",
+  "alternative_configuration_ids": [
+    "00000000-0000-0000-0000-000000000014"
+  ],
+  "evidence_run_ids": [
+    "00000000-0000-0000-0000-000000000005"
+  ],
+  "explanation": "The measured candidate satisfies the stated SLOs with the highest goodput.",
+  "warnings": [
+    "This synthetic example is not certification evidence."
+  ]
+}

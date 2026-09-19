@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "operating_system": "ubuntu-24.04",
+  "kernel_version": "6.8.0-synthetic",
+  "driver_version": "synthetic-driver",
+  "cuda_version": "synthetic-cuda",
+  "pytorch_version": "synthetic-pytorch",
+  "nccl_version": "synthetic-nccl",
+  "engine_name": "vllm",
+  "engine_version": "pinned-version-pending",
+  "engine_image_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "kernel_library_versions": {
+    "flash-attention": "synthetic-version"
+  },
+  "container_runtime": "docker",
+  "provider_runtime": "local-host"
+}

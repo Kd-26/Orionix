@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "model_id": "synthetic/tiny-instruct",
+  "revision": "revision-0001",
+  "architecture": "SyntheticForCausalLM",
+  "parameter_count": 1000000,
+  "model_type": "synthetic",
+  "dense_or_moe": "dense",
+  "num_layers": 4,
+  "context_length": 8192,
+  "dtype": "bfloat16",
+  "quantization": null,
+  "tokenizer_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "model_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+}

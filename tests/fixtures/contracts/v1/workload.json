@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "input_tokens": {
+    "p50": 128,
+    "p95": 1024,
+    "max": 4096
+  },
+  "output_tokens": {
+    "p50": 64,
+    "p95": 256,
+    "max": 1024
+  },
+  "concurrency": {
+    "median": 4,
+    "peak": 16
+  },
+  "request_rate": {
+    "average": 2.0,
+    "peak": 8.0
+  },
+  "streaming": true,
+  "prefix_reuse_probability": 0.25,
+  "average_reusable_prefix_tokens": 64.0,
+  "workload_fingerprint": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+}

@@ -16,16 +16,19 @@ from pydantic import ValidationError
 @pytest.mark.contract
 def test_engine_launch_spec_requires_typed_arguments() -> None:
     with pytest.raises(ValidationError):
-        EngineLaunchSpec(executable="vllm", argv=())
+        EngineLaunchSpec(schema_version="1.0", executable="vllm", argv=())
 
     with pytest.raises(ValidationError):
-        EngineLaunchSpec(executable="/bin/sh", argv=("-c", "arbitrary command"))
+        EngineLaunchSpec(
+            schema_version="1.0", executable="/bin/sh", argv=("-c", "arbitrary command")
+        )
 
 
 @pytest.mark.contract
 def test_agent_command_is_allowlisted_and_time_bounded() -> None:
     issued_at = datetime.now(UTC)
     command = AgentCommand(
+        schema_version="1.0",
         command_id="command-1",
         command_type=AgentCommandType.INSPECT,
         job_id=JobId(uuid4()),
@@ -43,6 +46,7 @@ def test_agent_command_rejects_invalid_expiration() -> None:
     now = datetime.now(UTC)
     with pytest.raises(ValidationError):
         AgentCommand(
+            schema_version="1.0",
             command_id="command-1",
             command_type=AgentCommandType.CLEANUP,
             job_id=JobId(uuid4()),
@@ -58,6 +62,7 @@ def test_agent_command_rejects_shell_payloads() -> None:
     now = datetime.now(UTC)
     with pytest.raises(ValidationError):
         AgentCommand(
+            schema_version="1.0",
             command_id="command-1",
             command_type=AgentCommandType.START_ENGINE,
             job_id=JobId(uuid4()),

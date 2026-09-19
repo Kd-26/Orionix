@@ -47,7 +47,9 @@ class WorkloadSpec(ContractModel):
     schema_version: str = SCHEMA_VERSION
     input_tokens: TokenDistribution
     output_tokens: TokenDistribution
-    concurrency: ConcurrencyDistribution | None = None
-    request_rate: RequestRateDistribution | None = None
+    concurrency: ConcurrencyDistribution
+    request_rate: RequestRateDistribution
+    streaming: bool
     prefix_reuse_probability: float | None = Field(default=None, ge=0, le=1)
     average_reusable_prefix_tokens: float | None = Field(default=None, ge=0)
+    workload_fingerprint: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")

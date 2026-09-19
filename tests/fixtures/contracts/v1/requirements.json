@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "objective": {
+    "identifier": "MAXIMIZE_GOODPUT",
+    "weights": {}
+  },
+  "slo": {
+    "schema_version": "1.0",
+    "p95_ttft_ms": 500.0,
+    "p95_tpot_ms": 50.0,
+    "minimum_throughput_tokens_per_second": 100.0,
+    "maximum_cost_per_token_usd": 0.0001,
+    "maximum_error_rate": 0.01
+  },
+  "quality_constraints": [],
+  "experiment_budget": {
+    "maximum_candidates": 20,
+    "maximum_elapsed_seconds": 7200.0,
+    "maximum_gpu_hours": 4.0,
+    "maximum_cost_usd": 25.0,
+    "maximum_consecutive_oom_candidates": 2,
+    "maximum_repeated_infrastructure_failures": 3,
+    "minimum_finalist_confirmation_runs": 2
+  }
+}
