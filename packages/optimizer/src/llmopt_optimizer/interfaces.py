@@ -5,6 +5,9 @@ from typing import Protocol
 
 from llmopt_schemas import (
     BenchmarkResult,
+    CandidateFilterInput,
+    CandidateFilterResult,
+    EngineCapabilityRecord,
     HardwareSpec,
     ModelSpec,
     ServingConfig,
@@ -22,7 +25,9 @@ class OptimizationContext:
 
 
 class CapabilityEvaluator(Protocol):
-    def accepts(self, context: OptimizationContext, config: ServingConfig) -> bool: ...
+    def evaluate(
+        self, input_: CandidateFilterInput, capabilities: EngineCapabilityRecord
+    ) -> CandidateFilterResult: ...
 
 
 class CandidateGenerator(Protocol):

@@ -1,5 +1,6 @@
-"""Optimization interfaces without algorithms."""
+"""Optimization interfaces and deterministic pre-execution filtering."""
 
+from llmopt_optimizer.compatibility import CandidateCompatibilityEvaluator
 from llmopt_optimizer.interfaces import (
     CandidateGenerator,
     CapabilityEvaluator,
@@ -10,6 +11,7 @@ from llmopt_optimizer.interfaces import (
 )
 
 __all__ = [
+    "CandidateCompatibilityEvaluator",
     "CandidateGenerator",
     "CapabilityEvaluator",
     "ConstraintEvaluator",
