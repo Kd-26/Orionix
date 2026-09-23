@@ -41,6 +41,59 @@ class CandidateConfiguration(ContractModel):
     compatibility: CompatibilityFingerprint | None = None
 
 
+class CandidateMemoryEstimate(ContractModel):
+    """Supplied estimate only; Day 4 performs no measurement or profiling."""
+
+    model_bytes: int = Field(ge=0)
+    kv_cache_bytes: int = Field(ge=0)
+    runtime_overhead_bytes: int = Field(ge=0)
+    safety_margin_ratio: float = Field(ge=0)
+
+
+class CandidateExecutionEstimate(ContractModel):
+    elapsed_seconds: float | None = Field(default=None, ge=0)
+    gpu_hours: float | None = Field(default=None, ge=0)
+    cost_usd: float | None = Field(default=None, ge=0)
+
+
+class CandidatePlacement(ContractModel):
+    node_ids: tuple[str, ...] = ()
+    accelerator_identifier_hashes: tuple[str, ...] = ()
+
+
+class ParallelismConstraints(ContractModel):
+    tensor_parallel_divisor: int | None = Field(default=None, ge=1)
+    pipeline_parallel_divisor: int | None = Field(default=None, ge=1)
+    require_peer_access: bool = False
+    single_node_only: bool = True
+
+
+class DraftModelEvidence(ContractModel):
+    model_id: str = Field(min_length=1)
+    tokenizer_fingerprint: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    architecture: str = Field(min_length=1)
+    context_length: int = Field(ge=1)
+    compatibility_verified: bool | None = None
+
+
+class CandidateFilterInput(ContractModel):
+    """Complete supplied input to the CPU-only pre-execution filter."""
+
+    SCHEMA_VERSION: ClassVar[str] = "1.0"
+
+    schema_version: str = SCHEMA_VERSION
+    candidate: CandidateConfiguration
+    model: ModelSpec
+    hardware: HardwareSpec
+    requirements: OptimizationRequirements
+    requested_context_length: int = Field(ge=1)
+    memory_estimate: CandidateMemoryEstimate | None = None
+    execution_estimate: CandidateExecutionEstimate | None = None
+    placement: CandidatePlacement = Field(default_factory=CandidatePlacement)
+    parallelism_constraints: ParallelismConstraints = Field(default_factory=ParallelismConstraints)
+    draft_model: DraftModelEvidence | None = None
+
+
 class CandidateEvaluation(ContractModel):
     candidate: CandidateConfiguration
     benchmark: BenchmarkResult | None = None

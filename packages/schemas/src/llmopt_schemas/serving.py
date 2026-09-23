@@ -34,6 +34,7 @@ class PrefixCacheConfig(ContractModel):
 
 class SpeculativeDecodingConfig(ContractModel):
     enabled: bool = False
+    method: str | None = None
     draft_model_id: str | None = None
 
 
