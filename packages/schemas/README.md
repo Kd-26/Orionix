@@ -20,6 +20,10 @@ database, or call a provider.
 | Requirements and experiment budget | `llmopt_schemas.requirements.OptimizationRequirements` | `1.0` |
 | Optimization job | `llmopt_schemas.optimization.OptimizationJobSpec` | `1.0` |
 | Candidate configuration | `llmopt_schemas.optimization.CandidateConfiguration` | `1.0` |
+| Candidate filter input | `llmopt_schemas.optimization.CandidateFilterInput` | `1.0` |
+| Engine capability record | `llmopt_schemas.compatibility.EngineCapabilityRecord` | `1.0` |
+| Rule result | `llmopt_schemas.compatibility.RuleResult` | `1.0` |
+| Candidate filter result | `llmopt_schemas.compatibility.CandidateFilterResult` | `1.0` |
 | Benchmark result | `llmopt_schemas.benchmark.BenchmarkResult` | `2.0` |
 | Recommendation | `llmopt_schemas.optimization.Recommendation` | `1.0` |
 | Execution Capsule manifest | `llmopt_capsule.manifest.ExecutionCapsuleManifest` | `2.0` |
@@ -41,3 +45,8 @@ first serialization freeze for the current versions.
 The synthetic golden JSON examples live under
 `tests/fixtures/contracts/v1/`. Contract tests load, serialize, reload, and
 compare every example.
+
+Day 4 compatibility examples live under
+`tests/fixtures/compatibility/v1/`. The pinned version in those fixtures is
+explicitly synthetic and is not production vLLM or Orionix certification
+evidence.

@@ -1,6 +1,6 @@
 # Current milestone and decision register
 
-**Current milestone: Day 3 shared data formats.** Day 1 product decisions and Day 2 package boundaries remain frozen below.
+**Current milestone: Day 4 pre-execution compatibility rules.** Days 1–3 remain frozen below.
 
 ## Implemented foundation
 
@@ -9,6 +9,10 @@
 - Typed/versioned bootstrap contracts, configuration/error/logging conventions, provider/engine ports, CLI/help shell, CI, and development documentation inherited from the repository foundation.
 - Capability-adaptive accelerator, node, interconnect, cluster, software, model, workload, requirement, job, candidate, benchmark, recommendation, and capsule contracts with synthetic golden JSON examples.
 - Strict schema-version handling: missing or mismatched versions fail instead of being silently interpreted as current data.
+- Versioned engine-capability, candidate-filter input, rule-result, and aggregate-result contracts with synthetic fixtures.
+- Thirteen deterministic CPU-only checks for memory, architecture, precision, quantization, context, parallelism, topology, budget, engine features, speculative decoding, expert parallelism, and certification.
+- Three-way `ALLOWED`, `REJECTED`, and `EXPERIMENTAL` decisions with stable customer-facing reason codes; unknown facts never become approval.
+- Separate engine-compatibility and Orionix-certification decisions, with all invalid candidates filtered before any future execution boundary.
 
 ## Frozen architecture decisions
 
@@ -36,13 +40,14 @@ Cloud provisioning; agent networking; NVIDIA/NVML discovery; Docker/GPU access; 
 ## Delivery sequence
 
 1. **Complete:** capability and cluster contract schemas with golden fixtures.
-2. **Next:** control-plane persistence/authorization boundaries and secure fake-backed agent protocol.
-3. Local CPU-safe discovery, then gated NVIDIA/topology discovery and constrained vLLM lifecycle.
-4. Reproducible baseline/candidate benchmarking and canonical metrics.
-5. Feasible candidate generation, bounded optimization, constraints, quality, and Pareto confirmation.
-6. Reports, layered capsules, and reviewable deployment exports.
-7. Provider adapters selected by evidence, followed by revalidation/history.
-8. Security, compatibility, recovery, soak, and isolated paid-pilot gates.
+2. **Complete:** supplied-data pre-execution compatibility rules and synthetic customer-readable examples.
+3. **Next:** control-plane persistence/authorization boundaries and secure fake-backed agent protocol.
+4. Local CPU-safe discovery, then gated NVIDIA/topology discovery and constrained vLLM lifecycle.
+5. Reproducible baseline/candidate benchmarking and canonical metrics.
+6. Feasible candidate generation, bounded optimization, constraints, quality, and Pareto confirmation.
+7. Reports, layered capsules, and reviewable deployment exports.
+8. Provider adapters selected by evidence, followed by revalidation/history.
+9. Security, compatibility, recovery, soak, and isolated paid-pilot gates.
 
 ## Open decisions
 

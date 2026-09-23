@@ -3,9 +3,10 @@
 This document freezes the capability model. Day 3 implements the core versioned
 accelerator, node, interconnect, cluster, software-environment, model, workload,
 requirement, job, candidate, benchmark, recommendation, and capsule contracts.
-Discovery and derived capability evaluation remain unimplemented. Unknown facts
-remain unknown; reported, measured, and inferred values carry source and
-confidence.
+Day 4 implements supplied-data compatibility evaluation and keeps engine
+compatibility separate from Orionix certification. Discovery remains
+unimplemented. Unknown facts remain unknown; reported, measured, and inferred
+values carry source and confidence.
 
 ## Required contracts
 
@@ -51,7 +52,9 @@ Replica count; data, tensor, pipeline, expert, and context parallel sizes; rank-
 1. Validate that contracts can represent the environment (`ARCHITECTURALLY_SUPPORTED`).
 2. Evaluate model/cluster/software/configuration feasibility.
 3. Ask the pinned engine adapter whether the combination is `ENGINE_COMPATIBLE`.
-4. Match the complete fingerprint to retained certification evidence (`CERTIFIED`) or label permitted incomplete evidence `EXPERIMENTAL`.
+4. Match the complete synthetic/profile fingerprint to retained certification evidence (`CERTIFIED`) or label permitted incomplete evidence `EXPERIMENTAL`.
 5. Reject known invalid, prohibited, or out-of-bound combinations as `UNSUPPORTED` with reasons.
 
 The canonical state definitions are in the [support matrix](../supported-matrix.md).
+The implemented Day 4 behavior is in the
+[pre-execution compatibility rules](compatibility-rules.md).

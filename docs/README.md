@@ -9,6 +9,7 @@ Authoritative entry points:
 - [Product workflow](architecture/product-workflow.md) assigns every customer step to an owner and trust boundary.
 - [Component ownership](architecture/component-ownership.md) separates common control concepts from capability-adaptive behavior.
 - [Capability model](architecture/capability-model.md), [cluster topology](architecture/cluster-and-topology.md), and [compatibility/invalidation](architecture/compatibility-and-invalidation.md) define future contracts.
+- [Pre-execution compatibility rules](architecture/compatibility-rules.md) define the implemented three-way Day 4 filter, stable reason codes, and synthetic manual examples.
 - [Contract versioning](architecture/contract-versioning.md) defines mandatory schema versions, golden examples, and ownership.
 - [Certification policy](operations/certification-policy.md), [launch gates](operations/launch-gates.md), and the [risk register](operations/risk-register.md) govern production claims.
 - [Customer data boundaries](security/customer-data-boundaries.md) and [data classification](security/data-classification.md) govern data movement.
