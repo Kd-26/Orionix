@@ -10,6 +10,7 @@ from llmopt_schemas import (
     BenchmarkResult,
     CandidateConfiguration,
     ClusterSpec,
+    EngineCapabilityRecord,
     HardwareSpec,
     ModelSpec,
     NodeSpec,
@@ -23,6 +24,7 @@ from llmopt_schemas.base import ContractModel
 from pydantic import ValidationError
 
 FIXTURES = Path(__file__).parents[1] / "fixtures" / "contracts" / "v1"
+COMPATIBILITY_FIXTURES = Path(__file__).parents[1] / "fixtures" / "compatibility" / "v1"
 
 GOLDEN_CONTRACTS: dict[str, type[ContractModel]] = {
     "accelerator.json": AcceleratorSpec,
@@ -100,3 +102,39 @@ def test_unknown_future_architecture_is_representable_without_support_claim() ->
     assert accelerator.architecture_family == "future_architecture_x"
     assert "support" not in AcceleratorSpec.model_fields
     assert "certified" not in AcceleratorSpec.model_fields
+
+
+@pytest.mark.contract
+def test_engine_capability_record_round_trips_with_explicit_version() -> None:
+    payload: object = json.loads(
+        (COMPATIBILITY_FIXTURES / "engine-capability.json").read_text(encoding="utf-8")
+    )
+    record = EngineCapabilityRecord.model_validate(payload)
+
+    restored = EngineCapabilityRecord.model_validate_json(record.model_dump_json())
+
+    assert restored == record
+    assert record.provenance.synthetic is True
+    assert record.engine_version == "0.0.0+day4.synthetic"
+
+
+@pytest.mark.contract
+def test_engine_capability_record_requires_version_and_disjoint_states() -> None:
+    payload: object = json.loads(
+        (COMPATIBILITY_FIXTURES / "engine-capability.json").read_text(encoding="utf-8")
+    )
+    assert isinstance(payload, dict)
+    missing_version = dict(payload)
+    missing_version.pop("schema_version")
+    with pytest.raises(ValidationError, match="explicit schema_version"):
+        EngineCapabilityRecord.model_validate(missing_version)
+
+    architecture_rows = payload["accelerator_capabilities"]
+    assert isinstance(architecture_rows, list)
+    first_row = architecture_rows[0]
+    assert isinstance(first_row, dict)
+    precisions = first_row["precisions"]
+    assert isinstance(precisions, dict)
+    precisions["unsupported"] = ["BFLOAT16"]
+    with pytest.raises(ValidationError, match="more than one support state"):
+        EngineCapabilityRecord.model_validate(payload)

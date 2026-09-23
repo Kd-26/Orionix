@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "candidate": {
+    "schema_version": "1.0",
+    "configuration_id": "10000000-0000-0000-0000-000000000001",
+    "configuration": {
+      "schema_version": "1.0",
+      "engine": "vllm",
+      "parallelism": {"dp": 1, "tp": 2, "pp": 1, "ep": 1},
+      "precision": "bfloat16",
+      "prefix_cache": {"enabled": true},
+      "memory": {"gpu_memory_utilization_ratio": 0.9}
+    },
+    "generation_reason": "Synthetic candidate used to demonstrate an allowed rule result.",
+    "required_capabilities": ["prefix-cache"]
+  },
+  "model": {
+    "schema_version": "1.0",
+    "model_id": "synthetic/day4-model",
+    "revision": "synthetic-revision-001",
+    "architecture": "CertifiedSyntheticForCausalLM",
+    "parameter_count": 7000000000,
+    "model_type": "synthetic",
+    "dense_or_moe": "dense",
+    "num_layers": 32,
+    "context_length": 32768,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "tokenizer_fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "model_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "hardware": {
+    "schema_version": "1.0",
+    "cluster": {
+      "schema_version": "1.0",
+      "cluster_id": "synthetic-day4-cluster",
+      "nodes": [
+        {
+          "schema_version": "1.0",
+          "node_id": "synthetic-node-1",
+          "cpu_architecture": "x86_64",
+          "cpu_count": 16,
+          "ram_bytes": 137438953472,
+          "accelerators": [
+            {
+              "schema_version": "1.0",
+              "vendor": "synthetic-vendor",
+              "device_name": "synthetic-gpu-24gb",
+              "device_identifier_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "architecture_family": "synthetic-arch-v1",
+              "compute_capability": "synthetic-1.0",
+              "vram_bytes": 25769803776,
+              "supported_numeric_formats": ["bfloat16", "float16"]
+            },
+            {
+              "schema_version": "1.0",
+              "vendor": "synthetic-vendor",
+              "device_name": "synthetic-gpu-24gb",
+              "device_identifier_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "architecture_family": "synthetic-arch-v1",
+              "compute_capability": "synthetic-1.0",
+              "vram_bytes": 25769803776,
+              "supported_numeric_formats": ["bfloat16", "float16"]
+            }
+          ],
+          "operating_system": "synthetic-linux"
+        }
+      ],
+      "interconnects": [
+        {
+          "schema_version": "1.0",
+          "link_id": "synthetic-peer-link",
+          "link_type": "synthetic-peer-link",
+          "endpoint_a": {
+            "node_id": "synthetic-node-1",
+            "accelerator_identifier_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "endpoint_b": {
+            "node_id": "synthetic-node-1",
+            "accelerator_identifier_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "peer_access_capable": true
+        }
+      ],
+      "accelerator_count": 2,
+      "homogeneous": true,
+      "collective_capabilities": ["synthetic-collective"],
+      "cluster_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "software": {
+      "schema_version": "1.0",
+      "operating_system": "synthetic-linux",
+      "engine_name": "vllm",
+      "engine_version": "0.0.0+day4.synthetic"
+    }
+  },
+  "requirements": {
+    "schema_version": "1.0",
+    "objective": {"identifier": "MAXIMIZE_GOODPUT", "weights": {}},
+    "slo": {"schema_version": "1.0"},
+    "quality_constraints": [],
+    "experiment_budget": {
+      "maximum_candidates": 20,
+      "maximum_elapsed_seconds": 3600.0,
+      "maximum_gpu_hours": 2.0,
+      "maximum_cost_usd": 10.0,
+      "maximum_consecutive_oom_candidates": 2,
+      "maximum_repeated_infrastructure_failures": 3,
+      "minimum_finalist_confirmation_runs": 2
+    }
+  },
+  "requested_context_length": 8192,
+  "memory_estimate": {
+    "model_bytes": 21474836480,
+    "kv_cache_bytes": 4294967296,
+    "runtime_overhead_bytes": 2147483648,
+    "safety_margin_ratio": 0.1
+  },
+  "execution_estimate": {
+    "elapsed_seconds": 600.0,
+    "gpu_hours": 0.34,
+    "cost_usd": 1.25
+  },
+  "placement": {
+    "node_ids": ["synthetic-node-1", "synthetic-node-1"],
+    "accelerator_identifier_hashes": [
+      "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    ]
+  },
+  "parallelism_constraints": {
+    "tensor_parallel_divisor": 64,
+    "pipeline_parallel_divisor": 32,
+    "require_peer_access": true,
+    "single_node_only": true
+  },
+  "draft_model": null
+}

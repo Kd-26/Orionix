@@ -1,0 +1,89 @@
+{
+  "synthetic": true,
+  "base_input": "allowed-candidate.json",
+  "cases": [
+    {
+      "name": "allowed-candidate",
+      "description": "Every supplied fact is compatible and the exact synthetic profile is certified.",
+      "patch": {},
+      "expected_decision": "allowed",
+      "expected_reason_code": "CHECK_PASSED"
+    },
+    {
+      "name": "compatible-but-uncertified",
+      "description": "The engine can run the model architecture, but no exact Orionix certification exists.",
+      "patch": {
+        "candidate": {"configuration_id": "10000000-0000-0000-0000-000000000002"},
+        "model": {"architecture": "UncertifiedSyntheticForCausalLM"}
+      },
+      "expected_decision": "experimental",
+      "expected_reason_code": "ENGINE_COMPATIBLE_NOT_CERTIFIED"
+    },
+    {
+      "name": "model-does-not-fit",
+      "description": "The supplied estimate exceeds usable memory after its safety margin.",
+      "patch": {
+        "candidate": {"configuration_id": "10000000-0000-0000-0000-000000000003"},
+        "memory_estimate": {
+          "model_bytes": 53687091200,
+          "kv_cache_bytes": 8589934592,
+          "runtime_overhead_bytes": 4294967296,
+          "safety_margin_ratio": 0.1
+        }
+      },
+      "expected_decision": "rejected",
+      "expected_reason_code": "INSUFFICIENT_GPU_MEMORY"
+    },
+    {
+      "name": "fp8-on-incompatible-hardware",
+      "description": "The synthetic accelerators explicitly omit FP8 support.",
+      "patch": {
+        "candidate": {
+          "configuration_id": "10000000-0000-0000-0000-000000000004",
+          "configuration": {"precision": "float8_e4m3fn"}
+        }
+      },
+      "expected_decision": "rejected",
+      "expected_reason_code": "UNSUPPORTED_PRECISION"
+    },
+    {
+      "name": "too-many-tensor-parallel-gpus",
+      "description": "Tensor parallelism asks for four accelerators but only two exist.",
+      "patch": {
+        "candidate": {
+          "configuration_id": "10000000-0000-0000-0000-000000000005",
+          "configuration": {"parallelism": {"tp": 4}}
+        }
+      },
+      "expected_decision": "rejected",
+      "expected_reason_code": "INVALID_TENSOR_PARALLEL_SIZE"
+    },
+    {
+      "name": "speculative-without-draft-model",
+      "description": "Speculative decoding is enabled without draft-model evidence.",
+      "patch": {
+        "candidate": {
+          "configuration_id": "10000000-0000-0000-0000-000000000006",
+          "configuration": {
+            "speculative_decoding": {"enabled": true, "method": "draft-model"}
+          },
+          "required_capabilities": ["prefix-cache", "speculative-decoding"]
+        }
+      },
+      "expected_decision": "rejected",
+      "expected_reason_code": "SPECULATIVE_DRAFT_MODEL_REQUIRED"
+    },
+    {
+      "name": "unknown-vllm-feature",
+      "description": "The feature is absent from supported, unsupported, and unverified declarations.",
+      "patch": {
+        "candidate": {
+          "configuration_id": "10000000-0000-0000-0000-000000000007",
+          "required_capabilities": ["prefix-cache", "unknown-vllm-feature"]
+        }
+      },
+      "expected_decision": "experimental",
+      "expected_reason_code": "ENGINE_FEATURE_UNKNOWN"
+    }
+  ]
+}

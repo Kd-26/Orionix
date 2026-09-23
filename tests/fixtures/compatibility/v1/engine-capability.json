@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "record_version": "vllm-0.0.0-synthetic.r1",
+  "engine_name": "vllm",
+  "engine_version": "0.0.0+day4.synthetic",
+  "accelerator_capabilities": [
+    {
+      "vendor": "synthetic-vendor",
+      "architecture_family": "synthetic-arch-v1",
+      "precisions": {
+        "supported": ["bfloat16", "float16"],
+        "unsupported": ["float8_e4m3fn"],
+        "unverified": []
+      },
+      "quantizations": {
+        "supported": ["awq"],
+        "unsupported": ["gptq"],
+        "unverified": ["future-quant"]
+      }
+    }
+  ],
+  "explicitly_unsupported_architectures": ["synthetic-legacy-arch"],
+  "maximum_context_length": 32768,
+  "maximum_tensor_parallel_size": 4,
+  "parallelism_modes": {
+    "supported": ["data-parallel", "tensor-parallel", "pipeline-parallel"],
+    "unsupported": ["expert-parallel"],
+    "unverified": []
+  },
+  "engine_features": {
+    "supported": ["prefix-cache", "cuda-graph", "speculative-decoding"],
+    "unsupported": ["prefill-decode-disaggregation"],
+    "unverified": ["future-scheduler"]
+  },
+  "speculative_methods": {
+    "supported": ["draft-model"],
+    "unsupported": ["synthetic-unsupported-method"],
+    "unverified": []
+  },
+  "certification_profiles": [
+    {
+      "profile_id": "synthetic-profile-001",
+      "engine_version": "0.0.0+day4.synthetic",
+      "accelerator_vendor": "synthetic-vendor",
+      "accelerator_architecture": "synthetic-arch-v1",
+      "model_architecture": "CertifiedSyntheticForCausalLM",
+      "precision": "bfloat16",
+      "quantization": null,
+      "features": ["prefix-cache", "tensor-parallel"],
+      "evidence_reference": "synthetic://day4/not-production-evidence"
+    }
+  ],
+  "provenance": {
+    "source": "Synthetic Day 4 capability fixture; not a production vLLM support claim.",
+    "verified_on": null,
+    "synthetic": true,
+    "notes": "The production vLLM version remains an explicit open decision."
+  }
+}
